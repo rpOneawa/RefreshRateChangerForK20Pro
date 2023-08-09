@@ -37,11 +37,11 @@ class MainActivity : AppCompatActivity() {
         fun setRefreshRate(refreshRate: String, number: String, screenColor: String) {
             runCommand("service call SurfaceFlinger 1035 i32 $number", false)
             runCommand("echo $screenColor > /sys/devices/platform/kcal_ctrl.0/kcal", false)
-            refreshRateText.text = "当前刷新率：$refreshRate"
+            refreshRateText.text = "当前刷新率：$refreshRate Hz"
         }
 
         currentRefreshRate = runCommand("su -c 'dumpsys SurfaceFlinger | grep cur:[0-9]* -o | cut -f2 -d \":\"'", true)
-        refreshRateText.text = "当前刷新率：$currentRefreshRate"
+        refreshRateText.text = "当前刷新率：$currentRefreshRate Hz"
 
         btn60.setOnClickListener {setRefreshRate("60", "0", "256 256 256")}
         btn75.setOnClickListener {setRefreshRate("75", "2", "248 236 256")}
